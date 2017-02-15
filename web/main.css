@@ -1,0 +1,16 @@
+html, body, .container-table {
+    height: 100%;
+}
+.container-table {
+    display: table;
+}
+
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.icon-camera-size {
+    margin-bottom: 0;
+    font-size: 21px;
+}
