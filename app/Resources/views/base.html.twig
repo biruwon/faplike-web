@@ -29,7 +29,7 @@
 
 <div class="container container-table">
     <div class="row vertical-center-row">
-        <div class="text-center col-md-8 col-xs-8 col-md-offset-2 col-xs-offset-2">
+        <div class="text-center upload-form col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
 
             <form id="upload_form" name="upload_form" class="form-horizontal" enctype="multipart/form-data" action="upload-image" method="POST">
                 <div class="form-group">
@@ -43,8 +43,15 @@
                 </div>
             </form>
 
-            <div id="preview">
-                <p>No file selected!</p>
+            <div class="images-container center-block">
+
+                <div id="preview" class="col-xs-6 col-md-6">
+                    <img src="uploads/images/antonio1.jpg" alt="..." class="img-thumbnail img-responsive">
+                </div>
+                <div id="look-a-like" class="col-xs-6 col-md-6">
+                    <img alt="..." class="img-thumbnail img-responsive">
+                </div>
+
             </div>
 
         </div>

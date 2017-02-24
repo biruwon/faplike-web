@@ -4,6 +4,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Image;
 use AppBundle\Form\ImageType;
+use AppBundle\Service\ImageUploader;
+use AppBundle\Service\PersonPredictor;
+use AppBundle\Repository\MainImage;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,9 +35,22 @@ class DefaultController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $image->getImage();
-            $imageName = $this->get('dopplerganger.image_uploader')->upload($image);
+            /** @var ImageUploader $imageUploader */
+            $imageUploader = $this->get(ImageUploader::DIC);
+            $imageName = $imageUploader->upload($image);
+
+            /** @var PersonPredictor $personPredictor */
+            $personPredictor = $this->get(PersonPredictor::DIC);
+            $predictedName = $personPredictor->predict($imageName);
+
+            /** @var MainImage $mainImageRepository */
+            $mainImageRepository = $this->get(MainImage::DIC);
+            $lookALikeImage = $mainImageRepository->getByName($predictedName);
         }
 
-        return new JsonResponse($imageName);
+        return new JsonResponse([
+            'mainImage' => $lookALikeImage,
+            'name' => $predictedName
+        ]);
     }
 }

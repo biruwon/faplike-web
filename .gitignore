@@ -15,4 +15,5 @@
 /vendor/
 /web/bundles/
 /web/uploads/
+/web/main_images/
 .idea/

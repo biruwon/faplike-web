@@ -1,9 +1,18 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/service_container.html
 parameters:
-    images_directory: '%kernel.root_dir%/../web/uploads/images'
+    uploads_directory: '%kernel.root_dir%/../web/uploads/images'
+    main_image_directory: 'main_images'
 
 services:
-    dopplerganger.image_uploader:
+    dopplerganger.service.image_uploader:
         class: AppBundle\Service\ImageUploader
-        arguments: ['%images_directory%']
+        arguments: ['%uploads_directory%']
+
+    dopplerganger.service.person_predictor:
+        class: AppBundle\Service\PersonPredictor
+        arguments: ['%uploads_directory%']
+
+    dopplerganger.repository.main_image:
+        class: AppBundle\Repository\MainImage
+        arguments: ['%main_image_directory%']

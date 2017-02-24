@@ -14,3 +14,26 @@ html, body, .container-table {
     margin-bottom: 0;
     font-size: 21px;
 }
+
+.upload-form {
+    overflow: hidden;
+    height: 45%;
+}
+
+div.images-container div {
+    max-width: 40vh;
+    max-height: 40vh;
+    overflow: hidden;
+}
+
+div.images-container div {
+    max-height: inherit;
+}
+
+#preview {
+
+}
+
+#look-a-like {
+
+}
