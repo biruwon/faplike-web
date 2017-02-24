@@ -5,19 +5,18 @@
 
 function handleFiles(files) {
 
-    var preview = document.getElementById("preview");
-
     var file = files[0];
     var imageType = /^image\//;
 
     if (!imageType.test(file.type)) {
         console.log('Wrong type')
     }
-    
-    new FileUpload(file);
+
+    displayPreview(file);
+    fileUpload(file);
 }
 
-function FileUpload(file) {
+function fileUpload(file) {
 
     var form = document.getElementById('upload_form');
     var data = new FormData(form);
@@ -37,10 +36,30 @@ function FileUpload(file) {
     });
 }
 
+function displayPreview(file) {
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        appendImageToElement('#preview', 'preview-img', e.target.result, 'img-thumbnail img-responsive', 'Picture you just upload!');
+    }
+
+    reader.readAsDataURL(file);
+}
+
 function displayLookALike(imagePath) {
 
-    var lookALikeDiv = document.getElementById('look-a-like');
-    var lookALikeImg = lookALikeDiv.firstElementChild;
+    appendImageToElement('#look-a-like', 'look-a-like-img', imagePath, 'img-thumbnail img-responsive', 'Picture of the look a like person');
+}
 
-    lookALikeImg.setAttribute('src', imagePath);
+function appendImageToElement(elementId, imgId, imgSrc, imgClasses, imgAlt) {
+
+    var img = $('<img />', {
+        id: imgId,
+        src: imgSrc,
+        class: imgClasses,
+        alt: imgAlt
+    });
+
+    img.appendTo($(elementId));
 }
