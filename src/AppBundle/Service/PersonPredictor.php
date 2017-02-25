@@ -19,9 +19,12 @@ class PersonPredictor
 
     public function predict($imageName)
     {
-        return 'antonio';
+        //@TODO how to call docker dinamically
+        $dockerCall = 'sudo docker exec 5ce1bd2eaf7b /root/openface/demos/classifier.py --verbose infer /root/openface/web-data/classifier.pkl ';
+        $dockerCall .= '/root/openface/web-data/uploads/images/';
+        $dockerCall .= $imageName;
 
-        $process = new Process('sudo docker exec 5c8cf3e58925 /root/openface/demos/classifier.py --verbose infer /root/openface/docker_data/test-60/generated-embeddings/classifier.pkl /root/openface/docker_data/images_to_test/joana.png');
+        $process = new Process($dockerCall);
         $process->run();
 
         if (!$process->isSuccessful()) {

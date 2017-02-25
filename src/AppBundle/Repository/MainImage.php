@@ -15,6 +15,6 @@ class MainImage
 
     public function getByName($name)
     {
-        return sprintf('%s/%s/%s', $this->targetDir, $name, 'pic.jpg');
+        return sprintf('%s/%s/%s', $this->targetDir, $name, 'main.jpg');
     }
 }
