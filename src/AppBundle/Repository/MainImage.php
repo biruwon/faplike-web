@@ -4,7 +4,7 @@ namespace AppBundle\Repository;
 
 class MainImage
 {
-    const DIC = 'dopplerganger.repository.main_image';
+    const DIC = 'doppelganger.repository.main_image';
 
     private $targetDir;
 
