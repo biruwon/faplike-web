@@ -8,6 +8,7 @@ use AppBundle\Form\ImageType;
 use AppBundle\Service\ImageUploader;
 use AppBundle\Service\PersonPredictor;
 use AppBundle\Service\ImageFromUrl;
+use AppBundle\Service\VideoAPI;
 use AppBundle\Repository\MainImage;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,6 +35,11 @@ class DefaultController extends Controller
      */
     public function uploadImageAction(Request $request)
     {
+        return new JsonResponse([
+            'mainImage' => 'test.jpg',
+            'name' => 'test'
+        ]);
+
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
@@ -65,9 +71,6 @@ class DefaultController extends Controller
      */
     public function uploadFromUrlAction(Request $request)
     {
-        /* Remove me! */
-
-
         $url = new Url();
 
         // This is just another way of doing it without form type, unify the forms for image and url
@@ -107,5 +110,16 @@ class DefaultController extends Controller
             'mainImage' => $lookALikeImage,
             'name' => $predictedName
         ]);
+    }
+
+    /**
+     * @Route("/embed/{name}", name="embed-video")
+     */
+    public function getEmbedVideos($name)
+    {
+        $videoAPI = $this->get(VideoAPI::DIC);
+        $embedIds = $videoAPI->search($name);
+
+        return new JsonResponse(['embedIds' => $embedIds]);
     }
 }

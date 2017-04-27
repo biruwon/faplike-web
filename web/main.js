@@ -75,6 +75,18 @@ function displayPreview(file) {
 function displayLookALike(imagePath) {
 
     appendImageToElement('#look-a-like', 'look-a-like-img', imagePath, 'img-thumbnail img-responsive', 'Picture of the look a like person');
+
+    $.ajax({
+        url: "/embed/" + 'aaliyah ca pelle',
+        type: "GET",
+        contentType: false,
+        success: function(response) {
+            displayEmbedVideos(response.embedIds);
+        },
+        error: function(jqXHR, textStatus, errorMessage) {
+            console.log(errorMessage); // Optional
+        }
+    });
 }
 
 function appendImageToElement(elementId, imgId, imgSrc, imgClasses, imgAlt) {
@@ -87,4 +99,12 @@ function appendImageToElement(elementId, imgId, imgSrc, imgClasses, imgAlt) {
     });
 
     img.appendTo($(elementId));
+}
+
+function displayEmbedVideos(embedIds) {
+    console.log(embedIds);
+    for (var embedId in embedIds) {
+        var iframe = '<iframe class="embed-responsive-item" src="http://www.pornhub.com/embed/' + embedIds[embedId] + '" scrolling="no"></iframe>';
+        $('#embedVideos').append(iframe);
+    }
 }

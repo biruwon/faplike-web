@@ -16,6 +16,9 @@ services:
     doppelganger.service.image_from_url:
         class: AppBundle\Service\ImageFromUrl
 
+    doppelganger.service.video_api:
+        class: AppBundle\Service\VideoAPI
+
     doppelganger.repository.main_image:
         class: AppBundle\Repository\MainImage
         arguments: ['%main_image_directory%']
