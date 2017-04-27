@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,25 +17,13 @@ class Image
      */
     private $image;
 
-    private $url;
-
     public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(UploadedFile $image)
+    public function setImage(File $image)
     {
         $this->image = $image;
-    }
-
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    public function setUrl($url)
-    {
-        $this->url = $url;
     }
 }

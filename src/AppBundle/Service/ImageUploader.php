@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageUploader
@@ -15,7 +16,7 @@ class ImageUploader
         $this->targetDir = $targetDir;
     }
 
-    public function upload(UploadedFile $file)
+    public function upload(File $file)
     {
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
