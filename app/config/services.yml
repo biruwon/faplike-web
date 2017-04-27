@@ -13,6 +13,9 @@ services:
         class: AppBundle\Service\PersonPredictor
         arguments: ['%uploads_directory%']
 
+    doppelganger.service.image_from_url:
+        class: AppBundle\Service\ImageFromUrl
+
     doppelganger.repository.main_image:
         class: AppBundle\Repository\MainImage
         arguments: ['%main_image_directory%']

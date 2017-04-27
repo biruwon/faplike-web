@@ -16,7 +16,7 @@ html, body, .container-table {
 }
 
 .upload-form {
-    overflow: hidden;
+    /* overflow: hidden;*/
     height: 50%;
 }
 

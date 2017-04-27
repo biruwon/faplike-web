@@ -29,12 +29,12 @@
 
 <div class="container container-table">
     <div class="row vertical-center-row">
-        <div class="text-center upload-form col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
+        <div class="text-center upload-form col-xs-12 col-md-8 col-md-offset-2 col-ms-8">
 
             <form id="upload_form" name="upload_form" class="form-horizontal" enctype="multipart/form-data" action="upload-image" method="POST">
                 <div class="form-group">
                     <div class="input-group">
-                        <input id="input_url" name="upload_form[url]" type="text" class="form-control" placeholder="Paste image URL or click on the camera icon to upload yours">
+                        <input id="input_url" name="upload_form[url]" type="text" class="form-control" onpaste="handleUrl(event)" placeholder="Paste image URL or click on the camera icon to upload yours">
                         <input id="upload_icon" name="upload_form[image]" type="file" class="form-control" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
                         <div class="input-group-addon">
                             <label for="upload_icon" class="icon-camera-size"><i class="fa fa-camera-retro fa-1x margin-top-icon"></i></label>
@@ -43,12 +43,12 @@
                 </div>
             </form>
 
-            <div class="images-container center-block">
+            <!-- <div class="images-container center-block">-->
 
-                <div id="preview" class="col-xs-6 col-md-6"></div>
-                <div id="look-a-like" class="col-xs-6 col-md-6"></div>
+                <div id="preview" class="col-xs-12 col-sm-6 col-md-6"></div>
+                <div id="look-a-like" class="col-xs-12 col-sm-6 col-md-6"></div>
 
-            </div>
+            <!-- </div> -->
 
         </div>
     </div>

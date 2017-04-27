@@ -2,6 +2,31 @@
  * Created by arodriguez on 15/02/17.
  */
 
+function handleUrl(event) {
+
+    var clipboardData = event.clipboardData || event.originalEvent.clipboardData || window.clipboardData;
+    var url = clipboardData.getData('text');
+
+    //@TODO: extract all the appends, validate image and display error
+    appendImageToElement('#preview', 'preview-img', url, 'img-thumbnail img-responsive', 'Picture you just upload!');
+
+    var formData = new FormData();
+    formData.append('upload_form[url]', url);
+
+    $.ajax({
+        url: "/upload-from-url",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            displayLookALike(response.mainImage);
+        },
+        error: function(jqXHR, textStatus, errorMessage) {
+            console.log(errorMessage); // Optional
+        }
+    });
+}
 
 function handleFiles(files) {
 
@@ -18,15 +43,15 @@ function handleFiles(files) {
 
 function fileUpload(file) {
 
-    var form = document.getElementById('upload_form');
-    var data = new FormData(form);
+    var formData = new FormData();
+    formData.append('upload_form[image]', file);
 
     $.ajax({
         url: "/upload-image",
         type: "POST",
-        data: data,
+        data: formData,
         processData: false,
-        contentType:false,
+        contentType: false,
         success: function(response) {
             displayLookALike(response.mainImage);
         },
