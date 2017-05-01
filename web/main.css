@@ -1,39 +1,70 @@
-html, body, .container-table {
+html, body, .container {
     height: 100%;
-}
-.container-table {
-    display: table;
 }
 
 .vertical-center-row {
-    display: table-cell;
-    vertical-align: middle;
+    margin-top: 40%;
+    height: 60%;
+    float: none;
 }
+
+.vertical-top-row {
+    vertical-align: top;
+    margin-top: 2%;
+    height: 60%;
+    float: none;
+}
+
+    .upload-form {
+        height: 10%;
+    }
+
+    .images-container {
+        height: 90%;
+    }
+
+    .images-container div {
+        height: 100%;
+    }
+
+    .images-container img {
+        height: 100%;
+    }
+
+
+        #preview {
+
+        }
+
+        #look-a-like {
+
+        }
+
+.vertical-pictures-row {
+    height: 30%;
+    margin-top: 10%;
+}
+    .vertical-pictures-row img, div {
+        height: 100%;
+    }
+
+.vertical-videos-row {
+    height: 30%;
+    margin-top: 10%;
+}
+
+/* Other stuff */
 
 .icon-camera-size {
     margin-bottom: 0;
     font-size: 21px;
 }
 
-.upload-form {
-    /* overflow: hidden;*/
-    height: 50%;
-}
-
-div.images-container div {
-    max-width: 40vh;
-    max-height: 40vh;
-    overflow: hidden;
-}
-
-div.images-container div {
-    max-height: inherit;
-}
-
-#preview {
-
-}
-
-#look-a-like {
-
+.grayscale {
+    filter: grayscale(100%); /* Current draft standard */
+    -webkit-filter: grayscale(100%); /* New WebKit */
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: gray; /* IE6+ */
 }

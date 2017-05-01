@@ -27,40 +27,35 @@
 </head>
 <body>
 
-<div class="container container-table">
-    <div class="row vertical-center-row">
-        <div class="text-center upload-form col-xs-12 col-md-8 col-md-offset-2 col-ms-8">
+<div class="container">
 
-            <form id="upload_form" name="upload_form" class="form-horizontal" enctype="multipart/form-data" action="upload-image" method="POST">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input id="input_url" name="upload_form[url]" type="text" class="form-control" onpaste="handleUrl(event)" placeholder="Paste image URL or click on the camera icon to upload yours">
-                        <input id="upload_icon" name="upload_form[image]" type="file" class="form-control" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
-                        <div class="input-group-addon">
-                            <label for="upload_icon" class="icon-camera-size"><i class="fa fa-camera-retro fa-1x margin-top-icon"></i></label>
+    <div id="centerRow" class="row vertical-center-row text-center col-xs-12 col-md-8 col-md-offset-2 col-ms-8">
+            <div class="upload-form">
+                <form id="upload_form" name="upload_form" class="form-horizontal" enctype="multipart/form-data" action="upload-image" method="POST">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input id="input_url" name="upload_form[url]" type="text" class="form-control" onpaste="handleUrl(event)" placeholder="Paste image URL or click on the camera icon to upload yours">
+                            <input id="upload_icon" name="upload_form[image]" type="file" class="form-control" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+                            <div class="input-group-addon">
+                                <label for="upload_icon" class="icon-camera-size"><i class="fa fa-camera-retro fa-1x margin-top-icon"></i></label>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
 
-            <!-- <div class="images-container center-block">-->
+            <div class="images-container">
 
                 <div id="preview" class="col-xs-12 col-sm-6 col-md-6"></div>
                 <div id="look-a-like" class="col-xs-12 col-sm-6 col-md-6"></div>
 
-            <!-- </div> -->
-
-            <!--<div id="embedVideos" class="embed-responsive embed-responsive-16by9">-->
-            <div id="embedVideos" class="">
-
             </div>
-
-            <!-- <iframe src="http://www.pornhub.com/embed/44bc40f3bc04f65b7a35" frameborder="0" width="608" height="468" scrolling="no"></iframe>
-            <iframe src="http://www.pornhub.com/embed/44bc40f3bc04f65b7a35" frameborder="0" width="608" height="468" scrolling="no"></iframe>
-            <iframe src="http://www.pornhub.com/embed/44bc40f3bc04f65b7a35" frameborder="0" width="608" height="468" scrolling="no"></iframe> -->
-
-        </div>
     </div>
+
+    <div id="actressPictures" class="row vertical-pictures-row text-center col-xs-12 col-md-8 col-md-offset-2 col-ms-8"></div>
+
+    <div id="embedVideos" class="row vertical-videos-row text-center col-xs-12 col-md-8 col-md-offset-2 col-ms-8"></div>
+
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

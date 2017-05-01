@@ -35,11 +35,6 @@ class DefaultController extends Controller
      */
     public function uploadImageAction(Request $request)
     {
-        return new JsonResponse([
-            'mainImage' => 'test.jpg',
-            'name' => 'test'
-        ]);
-
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
@@ -110,6 +105,18 @@ class DefaultController extends Controller
             'mainImage' => $lookALikeImage,
             'name' => $predictedName
         ]);
+    }
+
+    /**
+     * @Route("/featured-pictures/{name}", name="featured-pictures")
+     */
+    public function getFeaturedPictures($name)
+    {
+        /** @var MainImage $mainImageRepository */
+        $mainImageRepository = $this->get(MainImage::DIC);
+        $featuredImagePaths = $mainImageRepository->getFeaturedPictures($name);
+        
+        return new JsonResponse(['featuredImagePaths' => $featuredImagePaths]);
     }
 
     /**

@@ -16,7 +16,7 @@ class VideoAPI
             'query' => ['id' => '44bc40f3bc04f65b7a35', 'search' => $name, 'thumbsize' => 'medium']
         ]);
 
-        $embedVideosInformation = array_slice(json_decode($response->getBody(), true)['videos'], 0, 3);
+        $embedVideosInformation = array_slice(json_decode($response->getBody(), true)['videos'], 0, 2);
         $embedIds = [];
         foreach ($embedVideosInformation as $videoInfo) {
             $embedIds[] = $videoInfo['video_id'];
