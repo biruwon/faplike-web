@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <link href="https://fonts.googleapis.com/css?family=Modak" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="main.css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -29,15 +31,19 @@
 
 <div class="container">
 
+    <div class="row logo-row col-xs-12 col-sm-12 text-center">
+        <h1 class="logo">FAPLIKE</h1>
+    </div>
+
     <div id="centerRow" class="row vertical-center-row text-center col-xs-12 col-md-8 col-md-offset-2 col-ms-8">
             <div class="upload-form">
                 <form id="upload_form" name="upload_form" class="form-horizontal" enctype="multipart/form-data" action="upload-image" method="POST">
                     <div class="form-group">
                         <div class="input-group">
-                            <input id="input_url" name="upload_form[url]" type="text" class="form-control" onpaste="handleUrl(event)" placeholder="Paste image URL or click on the camera icon to upload yours">
+                            <input id="input_url" name="upload_form[url]" type="text" class="form-control input-url-color" onpaste="handleUrl(event)" placeholder="Paste image URL or click on the camera icon to upload yours">
                             <input id="upload_icon" name="upload_form[image]" type="file" class="form-control" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
-                            <div class="input-group-addon">
-                                <label for="upload_icon" class="icon-camera-size"><i class="fa fa-camera-retro fa-1x margin-top-icon"></i></label>
+                            <div class="input-group-addon upload-button-color">
+                                <label for="upload_icon" class="icon-camera-size camera-icon-color"><i class="fa fa-camera-retro fa-1x margin-top-icon camera-icon-background "></i></label>
                             </div>
                         </div>
                     </div>

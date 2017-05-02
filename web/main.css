@@ -2,17 +2,19 @@ html, body, .container {
     height: 100%;
 }
 
+.logo-row {
+    height: 10%;
+}
+
 .vertical-center-row {
-    margin-top: 40%;
+    margin-top: 25%;
     height: 60%;
-    float: none;
 }
 
 .vertical-top-row {
     vertical-align: top;
     margin-top: 2%;
     height: 60%;
-    float: none;
 }
 
     .upload-form {
@@ -58,6 +60,42 @@ html, body, .container {
 .icon-camera-size {
     margin-bottom: 0;
     font-size: 21px;
+}
+
+/* Colors */
+
+.logo {
+    font-family: 'Modak', cursive;
+    font-size: 4em;
+    color: #de2600;
+    text-shadow: 2px 1px 2px #f90
+}
+
+body {
+    background-color: #111;
+}
+
+.img-border {
+    background-color: #f90;
+    border: 1px solid #333;
+    padding: 1px;
+}
+
+.input-url-color {
+    border: 1px solid #f90;
+}
+
+.upload-button-color {
+    background-color: #f90;
+    border: 1px solid #f90;
+}
+
+.camera-icon-color {
+    color: #333;
+}
+
+.camera-icon-background {
+    background-color: #f90;
 }
 
 .grayscale {

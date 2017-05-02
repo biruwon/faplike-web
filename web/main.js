@@ -10,7 +10,7 @@ function handleUrl(event) {
     var url = clipboardData.getData('text');
 
     //@TODO: extract all the appends, validate image and display error
-    appendImageToElement('#preview', 'preview-img', url, 'img-thumbnail img-responsive grayscale', 'Picture you just upload!');
+    appendImageToElement('#preview', 'preview-img', url, 'img-thumbnail img-responsive img-border', 'Picture you just upload!');
 
     var formData = new FormData();
     formData.append('upload_form[url]', url);
@@ -75,7 +75,7 @@ function displayPreview(file) {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-        appendImageToElement('#preview', 'preview-img', e.target.result, 'img-thumbnail img-responsive grayscale', 'Picture you just upload!');
+        appendImageToElement('#preview', 'preview-img', e.target.result, 'img-thumbnail img-responsive img-border', 'Picture you just upload!');
     }
 
     reader.readAsDataURL(file);
@@ -83,7 +83,7 @@ function displayPreview(file) {
 
 function displayLookALike(imagePath) {
 
-    appendImageToElement('#look-a-like', 'look-a-like-img', imagePath, 'img-thumbnail img-responsive', 'Picture of the look a like person');
+    appendImageToElement('#look-a-like', 'look-a-like-img', imagePath, 'img-thumbnail img-responsive img-border', 'Picture of the look a like person');
 }
 
 function getFeaturedImages(name) {
@@ -107,7 +107,7 @@ function displayFeaturedImages(imagePaths) {
 
         var img = $('<img />', {
             src: imagePaths[index],
-            class: 'img-thumbnail img-responsive',
+            class: 'img-thumbnail img-responsive img-border',
             alt: 'Featured image'
         });
 
