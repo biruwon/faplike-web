@@ -82,6 +82,9 @@ html, body, .container {
     font-size: 1.3em;
     color: #f90;
 }
+    .description b {
+        color: #af1820;
+    }
 
 body {
     background-color: #000;

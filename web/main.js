@@ -104,7 +104,7 @@ function getFeaturedImages(name) {
 function displayFeaturedImages(imagePaths, name) {
 
     $('#actressPictures .description').removeClass('hidden').addClass('show');
-    $('#actressPictures .description').append(name);
+    $('#actressPictures .description').append('<b>' + name + '</b>');
 
     for (var index in imagePaths) {
 
