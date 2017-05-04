@@ -10,7 +10,7 @@ function handleUrl(event) {
     var url = clipboardData.getData('text');
 
     //@TODO: extract all the appends, validate image and display error
-    appendImageToElement('#preview', 'preview-img', url, 'img-thumbnail img-responsive img-border', 'Picture you just upload!');
+    appendImageToElement('#preview', 'preview-img', url, 'img-responsive img-border', 'Picture you just upload!');
 
     var formData = new FormData();
     formData.append('upload_form[url]', url);
@@ -75,7 +75,7 @@ function displayPreview(file) {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-        appendImageToElement('#preview', 'preview-img', e.target.result, 'img-thumbnail img-responsive img-border', 'Picture you just upload!');
+        appendImageToElement('#preview', 'preview-img', e.target.result, 'img-responsive img-border', 'Picture you just upload!');
     }
 
     reader.readAsDataURL(file);
@@ -83,7 +83,7 @@ function displayPreview(file) {
 
 function displayLookALike(imagePath) {
 
-    appendImageToElement('#look-a-like', 'look-a-like-img', imagePath, 'img-thumbnail img-responsive img-border', 'Picture of the look a like person');
+    appendImageToElement('#look-a-like', 'look-a-like-img', imagePath, 'img-responsive img-border', 'Picture of the look a like person');
 }
 
 function getFeaturedImages(name) {
@@ -93,7 +93,7 @@ function getFeaturedImages(name) {
         type: "GET",
         contentType: false,
         success: function(response) {
-            displayFeaturedImages(response.featuredImagePaths);
+            displayFeaturedImages(response.featuredImagePaths, name);
         },
         error: function(jqXHR, textStatus, errorMessage) {
             console.log(errorMessage); // Optional
@@ -101,13 +101,16 @@ function getFeaturedImages(name) {
     });
 }
 
-function displayFeaturedImages(imagePaths) {
+function displayFeaturedImages(imagePaths, name) {
+
+    $('#actressPictures .description').removeClass('hidden').addClass('show');
+    $('#actressPictures .description').append(name);
 
     for (var index in imagePaths) {
 
         var img = $('<img />', {
             src: imagePaths[index],
-            class: 'img-thumbnail img-responsive img-border',
+            class: 'img-responsive img-border',
             alt: 'Featured image'
         });
 
@@ -129,7 +132,7 @@ function getEmbedVideos(name) {
         type: "GET",
         contentType: false,
         success: function(response) {
-            displayEmbedVideos(response.embedIds);
+            displayEmbedVideos(response.embedIds, nameToSearch);
         },
         error: function(jqXHR, textStatus, errorMessage) {
             console.log(errorMessage); // Optional
@@ -137,10 +140,13 @@ function getEmbedVideos(name) {
     });
 }
 
-function displayEmbedVideos(embedIds) {
+function displayEmbedVideos(embedIds, name) {
+
+    $('#embedVideos .description').removeClass('hidden').addClass('show');
+    $('#embedVideos .description').append('<b>' + name + '</b>');
 
     for (var embedId in embedIds) {
-        var iframe = '<div class="col-xs-6"><iframe class="embed-responsive-item" src="http://www.pornhub.com/embed/' + embedIds[embedId] + '" scrolling="no"></iframe></div>';
+        var iframe = '<div class="col-xs-6"><iframe class="embed-responsive-item img-border" src="http://www.pornhub.com/embed/' + embedIds[embedId] + '" scrolling="no"></iframe></div>';
         $('#embedVideos').append(iframe);
     }
 }

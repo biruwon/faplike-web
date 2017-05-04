@@ -1,36 +1,36 @@
 html, body, .container {
-    height: 100%;
+    /* height: 100%; */
 }
 
 .logo-row {
-    height: 10%;
+    /* height: 10%; */
 }
 
 .vertical-center-row {
-    margin-top: 25%;
-    height: 60%;
+    margin-top: 15%;
+    /* height: 60%; */
 }
 
 .vertical-top-row {
     vertical-align: top;
     margin-top: 2%;
-    height: 60%;
+    /* height: 60%; */
 }
 
     .upload-form {
-        height: 10%;
+        /* height: 10%; */
     }
 
     .images-container {
-        height: 90%;
+        /* height: 90%; */
     }
 
     .images-container div {
-        height: 100%;
+        /* height: 100%; */
     }
 
     .images-container img {
-        height: 100%;
+        /* height: 100%; */
     }
 
 
@@ -43,15 +43,15 @@ html, body, .container {
         }
 
 .vertical-pictures-row {
-    height: 30%;
+    /* height: 30%; */
     margin-top: 10%;
 }
     .vertical-pictures-row img, div {
-        height: 100%;
+        /* height: 100%; */
     }
 
 .vertical-videos-row {
-    height: 30%;
+    /* height: 30%; */
     margin-top: 10%;
 }
 
@@ -62,23 +62,34 @@ html, body, .container {
     font-size: 21px;
 }
 
+@media (max-width: 767px) {
+    .col-xs-12 {
+        margin-bottom: 10px;
+    }
+}
+
 /* Colors */
 
 .logo {
     font-family: 'Modak', cursive;
     font-size: 4em;
-    color: #de2600;
+    color: #af1820;
     text-shadow: 2px 1px 2px #f90
 }
 
+.description {
+    font-family: 'Baloo', cursive;
+    font-size: 1.3em;
+    color: #f90;
+}
+
 body {
-    background-color: #111;
+    background-color: #000;
 }
 
 .img-border {
-    background-color: #f90;
-    border: 1px solid #333;
-    padding: 1px;
+    box-shadow: 2px 2px 2px #f90;
+    border-radius: 4px;
 }
 
 .input-url-color {
@@ -91,7 +102,7 @@ body {
 }
 
 .camera-icon-color {
-    color: #333;
+    color: #000;
 }
 
 .camera-icon-background {
