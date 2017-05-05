@@ -12,6 +12,9 @@ function handleUrl(event) {
     //@TODO: extract all the appends, validate image and display error
     appendImageToElement('#preview', 'preview-img', url, 'img-responsive img-border', 'Picture you just upload!');
 
+    //@TODO: encapsulate the nprogress for both and configure it with better steps
+    NProgress.start();
+
     var formData = new FormData();
     formData.append('upload_form[url]', url);
 
@@ -25,6 +28,7 @@ function handleUrl(event) {
             displayLookALike(response.mainImage);
             getFeaturedImages(response.name);
             getEmbedVideos(response.name);
+            NProgress.done();
         },
         error: function(jqXHR, textStatus, errorMessage) {
             console.log(errorMessage); // Optional
@@ -43,6 +47,8 @@ function handleFiles(files) {
         // @TODO: add proper validation here
         console.log('Wrong type')
     }
+
+    NProgress.start();
 
     displayPreview(file);
     fileUpload(file);
@@ -63,6 +69,7 @@ function fileUpload(file) {
             displayLookALike(response.mainImage);
             getFeaturedImages(response.name);
             getEmbedVideos(response.name);
+            NProgress.done();
         },
         error: function(jqXHR, textStatus, errorMessage) {
             console.log(errorMessage); // Optional
