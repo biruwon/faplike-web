@@ -4,7 +4,7 @@ namespace AppBundle\Repository;
 
 class MainImage
 {
-    const DIC = 'doppelganger.repository.main_image';
+    const DIC = 'faplike.repository.main_image';
 
     private $targetDir;
 

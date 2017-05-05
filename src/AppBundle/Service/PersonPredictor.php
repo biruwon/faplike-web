@@ -8,7 +8,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class PersonPredictor
 {
-    const DIC = 'doppelganger.service.person_predictor';
+    const DIC = 'faplike.service.person_predictor';
 
     private $targetDir;
 
@@ -20,7 +20,7 @@ class PersonPredictor
     public function predict($imageName)
     {
         //@TODO how to call docker dinamically
-        $dockerCall = 'sudo docker exec 2de4dfbb5fc2 /root/openface/demos/classifier.py --verbose infer /root/openface/web-data/classifier.pkl ';
+        $dockerCall = 'sudo docker exec dd1642e5376b /root/openface/demos/classifier.py --verbose infer /root/openface/web-data/classifier.pkl ';
         $dockerCall .= '/root/openface/web-data/uploads/images/';
         $dockerCall .= $imageName;
 

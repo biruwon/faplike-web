@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageUploader
 {
-    const DIC = 'doppelganger.service.image_uploader';
+    const DIC = 'faplike.service.image_uploader';
     
     private $targetDir;
 

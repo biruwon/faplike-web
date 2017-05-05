@@ -35,6 +35,11 @@ class DefaultController extends Controller
      */
     public function uploadImageAction(Request $request)
     {
+        /*return new JsonResponse([
+            'mainImage' => 'test.jpg',
+            'name' => 'emilia-d'
+        ]);*/
+
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);

@@ -5,20 +5,20 @@ parameters:
     main_image_directory: 'main_images'
 
 services:
-    doppelganger.service.image_uploader:
+    faplike.service.image_uploader:
         class: AppBundle\Service\ImageUploader
         arguments: ['%uploads_directory%']
 
-    doppelganger.service.person_predictor:
+    faplike.service.person_predictor:
         class: AppBundle\Service\PersonPredictor
         arguments: ['%uploads_directory%']
 
-    doppelganger.service.image_from_url:
+    faplike.service.image_from_url:
         class: AppBundle\Service\ImageFromUrl
 
-    doppelganger.service.video_api:
+    faplike.service.video_api:
         class: AppBundle\Service\VideoAPI
 
-    doppelganger.repository.main_image:
+    faplike.repository.main_image:
         class: AppBundle\Repository\MainImage
         arguments: ['%main_image_directory%']

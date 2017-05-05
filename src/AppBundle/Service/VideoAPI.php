@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 
 class VideoAPI
 {
-    const DIC = 'doppelganger.service.video_api';
+    const DIC = 'faplike.service.video_api';
 
     public function search($name)
     {

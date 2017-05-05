@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageFromUrl
 {
-    const DIC = 'doppelganger.service.image_from_url';
+    const DIC = 'faplike.service.image_from_url';
 
     public function getImage($imageUrl)
     {
