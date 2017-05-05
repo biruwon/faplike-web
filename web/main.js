@@ -10,7 +10,7 @@ function handleUrl(event) {
     var url = clipboardData.getData('text');
 
     //@TODO: extract all the appends, validate image and display error
-    appendImageToElement('#preview', 'preview-img', url, 'img-responsive img-border', 'Picture you just upload!');
+    appendImageToElement('#preview', 'preview-img', url, 'img-responsive center-block img-border', 'Picture you just upload!');
 
     //@TODO: encapsulate the nprogress for both and configure it with better steps
     NProgress.start();
@@ -82,7 +82,7 @@ function displayPreview(file) {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-        appendImageToElement('#preview', 'preview-img', e.target.result, 'img-responsive img-border', 'Picture you just upload!');
+        appendImageToElement('#preview', 'preview-img', e.target.result, 'img-responsive center-block img-border', 'Picture you just upload!');
     }
 
     reader.readAsDataURL(file);
@@ -90,7 +90,7 @@ function displayPreview(file) {
 
 function displayLookALike(imagePath) {
 
-    appendImageToElement('#look-a-like', 'look-a-like-img', imagePath, 'img-responsive img-border', 'Picture of the look a like person');
+    appendImageToElement('#look-a-like', 'look-a-like-img', imagePath, 'img-responsive center-block img-border', 'Picture of the look a like person');
 }
 
 function getFeaturedImages(name) {
@@ -110,19 +110,21 @@ function getFeaturedImages(name) {
 
 function displayFeaturedImages(imagePaths, name) {
 
+    nameToSearch = name.replace(/-/g, " ");
+
     $('#actressPictures .description').removeClass('hidden').addClass('show');
-    $('#actressPictures .description').append('<b>' + name + '</b>');
+    $('#actressPictures .description').append('<b>' + nameToSearch + '</b>');
 
     for (var index in imagePaths) {
 
         var img = $('<img />', {
             src: imagePaths[index],
-            class: 'img-responsive img-border',
+            class: 'img-responsive center-block img-border',
             alt: 'Featured image'
         });
 
         var div = $('<div/>', {
-            class: 'col-xs-4',
+            class: 'col-xs-12 col-md-4',
             html: img
         });
 
@@ -153,7 +155,7 @@ function displayEmbedVideos(embedIds, name) {
     $('#embedVideos .description').append('<b>' + name + '</b>');
 
     for (var embedId in embedIds) {
-        var iframe = '<div class="col-xs-6"><iframe class="embed-responsive-item img-border" src="http://www.pornhub.com/embed/' + embedIds[embedId] + '" scrolling="no"></iframe></div>';
+        var iframe = '<div class="col-xs-12 col-md-6"><iframe class="embed-responsive-item img-border" src="http://www.pornhub.com/embed/' + embedIds[embedId] + '" scrolling="no"></iframe></div>';
         $('#embedVideos').append(iframe);
     }
 }

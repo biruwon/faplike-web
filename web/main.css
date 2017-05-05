@@ -44,7 +44,7 @@ html, body, .container {
 
 .vertical-pictures-row {
     /* height: 30%; */
-    margin-top: 10%;
+    margin-top: 3%;
 }
     .vertical-pictures-row img, div {
         /* height: 100%; */
@@ -52,7 +52,7 @@ html, body, .container {
 
 .vertical-videos-row {
     /* height: 30%; */
-    margin-top: 10%;
+    margin-top: 3%;
 }
 
 /* Other stuff */
