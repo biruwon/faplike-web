@@ -25,7 +25,8 @@ function handleUrl(event) {
         processData: false,
         contentType: false,
         success: function(response) {
-            displayLookALike(response.mainImage);
+            displayLookALike(response.mainImage, response.name);
+            displayTryAgainButton();
             getFeaturedImages(response.name);
             getEmbedVideos(response.name);
             NProgress.done();
@@ -66,7 +67,8 @@ function fileUpload(file) {
         processData: false,
         contentType: false,
         success: function(response) {
-            displayLookALike(response.mainImage);
+            displayLookALike(response.mainImage, response.name);
+            displayTryAgainButton();
             getFeaturedImages(response.name);
             getEmbedVideos(response.name);
             NProgress.done();
@@ -88,7 +90,14 @@ function displayPreview(file) {
     reader.readAsDataURL(file);
 }
 
-function displayLookALike(imagePath) {
+function displayLookALike(imagePath, name) {
+
+    nameToSearch = name.replace(/-/g, " ");
+
+    $('#matchingInfo').append('' +
+        '<p>Your picture lookalike is '+ '<b>' + nameToSearch + '</b>' + ' with a 90%</p>' +
+        '<p>Maybe you just discover someone doing porn?</p>' +
+    '');
 
     appendImageToElement('#look-a-like', 'look-a-like-img', imagePath, 'img-responsive center-block img-border', 'Picture of the look a like person');
 }
@@ -175,6 +184,19 @@ function appendImageToElement(elementId, imgId, imgSrc, imgClasses, imgAlt) {
 function moveUploadInputToTop() {
 
     $('#centerRow').removeClass('vertical-center-row').addClass('vertical-top-row');
+}
+
+function displayTryAgainButton() {
+
+    $('.upload-form').replaceWith('' +
+        '<div class="row text-center">' +
+        '<button id="refreshPage" type="button" class="btn button-refresh" onclick="refreshPage()">Try again!</button>' +
+        '</div>' +
+        '');
+}
+
+function refreshPage() {
+    location.reload();
 }
 
 function grayscale(div,millisec,bool){

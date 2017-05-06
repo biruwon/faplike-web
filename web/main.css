@@ -112,6 +112,13 @@ body {
     background-color: #f90;
 }
 
+.button-refresh {
+    background-color: #f90;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
 .grayscale {
     filter: grayscale(100%); /* Current draft standard */
     -webkit-filter: grayscale(100%); /* New WebKit */
