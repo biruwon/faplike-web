@@ -25,7 +25,7 @@ function handleUrl(event) {
         processData: false,
         contentType: false,
         success: function(response) {
-            displayLookALike(response.mainImage, response.name);
+            displayLookALike(response.mainImage, response.name, response.confidence);
             displayTryAgainButton();
             getFeaturedImages(response.name);
             getEmbedVideos(response.name);
@@ -67,7 +67,7 @@ function fileUpload(file) {
         processData: false,
         contentType: false,
         success: function(response) {
-            displayLookALike(response.mainImage, response.name);
+            displayLookALike(response.mainImage, response.name, response.confidence);
             displayTryAgainButton();
             getFeaturedImages(response.name);
             getEmbedVideos(response.name);
@@ -90,12 +90,13 @@ function displayPreview(file) {
     reader.readAsDataURL(file);
 }
 
-function displayLookALike(imagePath, name) {
+function displayLookALike(imagePath, name, confidence) {
 
     nameToSearch = name.replace(/-/g, " ");
+    percentage = Math.round(confidence * 100) + '%';
 
     $('#matchingInfo').append('' +
-        '<p>Your picture lookalike is '+ '<b>' + nameToSearch + '</b>' + ' with a 90%</p>' +
+        '<p>Your picture lookalike is '+ '<b>' + nameToSearch + '</b>' + ' with a ' + percentage + '</p>' +
         '<p>Maybe you just discover someone doing porn?</p>' +
     '');
 
