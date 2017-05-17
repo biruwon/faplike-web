@@ -53,16 +53,17 @@ class DefaultController extends Controller
 
             /** @var PersonPredictor $personPredictor */
             $personPredictor = $this->get(PersonPredictor::DIC);
-            $predictedName = $personPredictor->predict($imageName);
+            $predictedInfo = $personPredictor->predict($imageName);
 
             /** @var MainImage $mainImageRepository */
             $mainImageRepository = $this->get(MainImage::DIC);
-            $lookALikeImage = $mainImageRepository->getByName($predictedName);
+            $lookALikeImage = $mainImageRepository->getByName($predictedInfo['name']);
         }
 
         return new JsonResponse([
             'mainImage' => $lookALikeImage,
-            'name' => $predictedName
+            'name' => $predictedInfo['name'],
+            'confidence' => $predictedInfo['confidence']
         ]);
     }
 
@@ -99,16 +100,17 @@ class DefaultController extends Controller
 
             /** @var PersonPredictor $personPredictor */
             $personPredictor = $this->get(PersonPredictor::DIC);
-            $predictedName = $personPredictor->predict($imageName);
+            $predictedInfo = $personPredictor->predict($imageName);
 
             /** @var MainImage $mainImageRepository */
             $mainImageRepository = $this->get(MainImage::DIC);
-            $lookALikeImage = $mainImageRepository->getByName($predictedName);
+            $lookALikeImage = $mainImageRepository->getByName($predictedInfo['name']);
         }
 
         return new JsonResponse([
             'mainImage' => $lookALikeImage,
-            'name' => $predictedName
+            'name' => $predictedInfo['name'],
+            'confidence' => $predictedInfo['confidence']
         ]);
     }
 
