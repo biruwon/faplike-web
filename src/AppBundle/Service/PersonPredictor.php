@@ -20,7 +20,7 @@ class PersonPredictor
     public function predict($imageName)
     {
         //@TODO how to call docker dinamically
-        $dockerCall = 'sudo docker exec dd1642e5376b /root/openface/demos/classifier.py --verbose infer /root/openface/web-data/classifier.pkl ';
+        $dockerCall = 'docker exec 5bf0cc3a12ee /root/openface/demos/classifier.py --verbose infer /root/openface/web-data/classifier-1576-limit-20.pkl ';
         $dockerCall .= '/root/openface/web-data/uploads/images/';
         $dockerCall .= $imageName;
 
@@ -33,10 +33,14 @@ class PersonPredictor
 
         $output = $process->getOutput();
 
-        //@TODO remove this shit
+        //@TODO remove this shit and create a DTO
         $namePredicted = trim($this->getStringBetween($output, 'Predict ', 'with'));
+        $predictionConfidence = trim($this->getStringBetween($output, 'with ', 'confidence'));
 
-        return $namePredicted;
+        return [
+            'name' => $namePredicted,
+            'confidence' => $predictionConfidence
+        ];
     }
 
     public function getStringBetween($string, $start, $end)
