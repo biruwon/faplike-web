@@ -25,7 +25,7 @@ function handleUrl(event) {
         processData: false,
         contentType: false,
         success: function(response) {
-            displayLookALike(response.mainImage, response.name, response.confidence);
+            displayLookALike(response.mainImage, response.name);
             displayTryAgainButton();
             getFeaturedImages(response.name);
             getEmbedVideos(response.name);
@@ -67,7 +67,7 @@ function fileUpload(file) {
         processData: false,
         contentType: false,
         success: function(response) {
-            displayLookALike(response.mainImage, response.name, response.confidence);
+            displayLookALike(response.mainImage, response.name);
             displayTryAgainButton();
             getFeaturedImages(response.name);
             getEmbedVideos(response.name);
@@ -90,14 +90,12 @@ function displayPreview(file) {
     reader.readAsDataURL(file);
 }
 
-function displayLookALike(imagePath, name, confidence) {
+function displayLookALike(imagePath, name) {
 
     nameToSearch = name.replace(/-/g, " ");
-    percentage = Math.round(confidence * 100) + '%';
 
     $('#matchingInfo').append('' +
-        '<p>Your picture lookalike is '+ '<b>' + nameToSearch + '</b>' + ' with a ' + percentage + '</p>' +
-        '<p>Maybe you just discover someone doing porn?</p>' +
+        '<p>Your picture lookalike is </p>'+ '<p><b>' + nameToSearch + '</b></p>' +
     '');
 
     appendImageToElement('#look-a-like', 'look-a-like-img', imagePath, 'img-responsive center-block img-border', 'Picture of the look a like person');
