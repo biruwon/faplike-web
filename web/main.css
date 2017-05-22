@@ -127,3 +127,19 @@ body {
     -o-filter: grayscale(100%);
     filter: gray; /* IE6+ */
 }
+
+/* Other */
+
+.vertical-videos-row .glyphicon-play-circle {
+    position: absolute;
+    top: 22%;
+    left: 26%;
+    font-size: 7em;
+    opacity: 0.5;
+    color: #f90;
+}
+
+.vertical-videos-row .glyphicon-play-circle:hover, .vertical-videos-row .glyphicon-play-circle:focus {
+    opacity: 1;
+}
+

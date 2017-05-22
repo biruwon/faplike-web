@@ -149,7 +149,7 @@ function getEmbedVideos(name) {
         type: "GET",
         contentType: false,
         success: function(response) {
-            displayEmbedVideos(response.embedIds, nameToSearch);
+            displayEmbedVideos(response.videoInfoList, nameToSearch);
         },
         error: function(jqXHR, textStatus, errorMessage) {
             console.log(errorMessage); // Optional
@@ -157,15 +157,19 @@ function getEmbedVideos(name) {
     });
 }
 
-function displayEmbedVideos(embedIds, name) {
+function displayEmbedVideos(videoInfoList, name) {
 
     $('#embedVideos .description').removeClass('hidden').addClass('show');
     $('#embedVideos .description').append('<b>' + name + '</b>');
 
-    for (var embedId in embedIds) {
-        var iframe = '<div class="col-xs-12 col-md-6"><iframe class="embed-responsive-item img-border" src="http://www.pornhub.com/embed/' + embedIds[embedId] + '" scrolling="no"></iframe></div>';
-        $('#embedVideos').append(iframe);
-    }
+    videoInfoList.forEach(function (videoInfo) {
+        var video = '' +
+            '<div class="col-xs-12 col-md-6"><img src="' + videoInfo.default_thumb + '" class="img-responsive img-border">' +
+            '<a href="' + videoInfo.url + '" target="_blank"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>' +
+            '</div>';
+
+        $('#embedVideos').append(video);
+    });
 }
 
 function appendImageToElement(elementId, imgId, imgSrc, imgClasses, imgAlt) {

@@ -131,9 +131,10 @@ class DefaultController extends Controller
      */
     public function getEmbedVideos($name)
     {
+        /** @var VideoAPI $videoAPI */
         $videoAPI = $this->get(VideoAPI::DIC);
-        $embedIds = $videoAPI->search($name);
+        $videoInfoList = $videoAPI->search($name);
 
-        return new JsonResponse(['embedIds' => $embedIds]);
+        return new JsonResponse(['videoInfoList' => $videoInfoList]);
     }
 }
