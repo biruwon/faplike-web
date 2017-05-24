@@ -35,29 +35,13 @@ class DefaultController extends Controller
      */
     public function uploadImageAction(Request $request)
     {
-        /*return new JsonResponse([
-            'mainImage' => 'test.jpg',
-            'name' => 'emilia-d'
-        ]);*/
-
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $image = $image->getImage();
 
-            /** @var ImageUploader $imageUploader */
-            $imageUploader = $this->get(ImageUploader::DIC);
-            $imageName = $imageUploader->upload($image);
-
-            /** @var PersonPredictor $personPredictor */
-            $personPredictor = $this->get(PersonPredictor::DIC);
-            $predictedInfo = $personPredictor->predict($imageName);
-
-            /** @var MainImage $mainImageRepository */
-            $mainImageRepository = $this->get(MainImage::DIC);
-            $lookALikeImage = $mainImageRepository->getByName($predictedInfo['name']);
+            list($predictedInfo, $lookALikeImage) = $this->onImageUpload($image);
         }
 
         return new JsonResponse([
@@ -94,17 +78,7 @@ class DefaultController extends Controller
             $validator = $this->get('validator');
             $validator->validate($image);
 
-            /** @var ImageUploader $imageUploader */
-            $imageUploader = $this->get(ImageUploader::DIC);
-            $imageName = $imageUploader->upload($image->getImage());
-
-            /** @var PersonPredictor $personPredictor */
-            $personPredictor = $this->get(PersonPredictor::DIC);
-            $predictedInfo = $personPredictor->predict($imageName);
-
-            /** @var MainImage $mainImageRepository */
-            $mainImageRepository = $this->get(MainImage::DIC);
-            $lookALikeImage = $mainImageRepository->getByName($predictedInfo['name']);
+            list($predictedInfo, $lookALikeImage) = $this->onImageUpload($image);
         }
 
         return new JsonResponse([
@@ -136,5 +110,26 @@ class DefaultController extends Controller
         $videoInfoList = $videoAPI->search($name);
 
         return new JsonResponse(['videoInfoList' => $videoInfoList]);
+    }
+
+    /**
+     * @param Image $image
+     * @return array
+     */
+    protected function onImageUpload(Image $image)
+    {
+        /** @var ImageUploader $imageUploader */
+        $imageUploader = $this->get(ImageUploader::DIC);
+        $imageName = $imageUploader->upload($image->getImage());
+
+        /** @var PersonPredictor $personPredictor */
+        $personPredictor = $this->get(PersonPredictor::DIC);
+        $predictedInfo = $personPredictor->predict($imageName);
+
+        /** @var MainImage $mainImageRepository */
+        $mainImageRepository = $this->get(MainImage::DIC);
+        $lookALikeImage = $mainImageRepository->getByName($predictedInfo['name']);
+
+        return [$predictedInfo, $lookALikeImage];
     }
 }
