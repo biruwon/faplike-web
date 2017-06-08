@@ -42,17 +42,40 @@ function handleFiles(files) {
     moveUploadInputToTop();
 
     var file = files[0];
+
+    if (isValidImage(file)) {
+
+        NProgress.start();
+
+        displayPreview(file);
+        fileUpload(file);
+
+    } else {
+
+        showAlertError();
+    }
+}
+
+function isValidImage(file) {
+
     var imageType = /^image\//;
 
-    if (!imageType.test(file.type)) {
-        // @TODO: add proper validation here
-        console.log('Wrong type')
-    }
+    return imageType.test(file.type);
+}
 
-    NProgress.start();
+function showAlertError() {
 
-    displayPreview(file);
-    fileUpload(file);
+    var alert = '' +
+        '<div id="uploadError" class="alert alert-danger alert-dismissible" role="alert">' +
+        '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>' +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+        'You need to upload a valid image!</div>' +
+    '';
+
+    $('.container').prepend(alert);
+    $(".alert-dismissible").delay(5000).slideUp(500, function(){
+        $(".alert-dismissible").alert('close');
+    });
 }
 
 function fileUpload(file) {

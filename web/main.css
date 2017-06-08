@@ -1,58 +1,24 @@
-html, body, .container {
-    /* height: 100%; */
-}
-
-.logo-row {
-    /* height: 10%; */
-}
 
 .vertical-center-row {
     margin-top: 15%;
-    /* height: 60%; */
 }
 
 .vertical-top-row {
     vertical-align: top;
     margin-top: 2%;
-    /* height: 60%; */
 }
-
-    .upload-form {
-        /* height: 10%; */
-    }
-
-    .images-container {
-        /* height: 90%; */
-    }
-
-    .images-container div {
-        /* height: 100%; */
-    }
-
-    .images-container img {
-        /* height: 100%; */
-    }
-
-
-        #preview {
-
-        }
-
-        #look-a-like {
-
-        }
 
 .vertical-pictures-row {
-    /* height: 30%; */
     margin-top: 3%;
 }
-    .vertical-pictures-row img, div {
-        /* height: 100%; */
-    }
 
 .vertical-videos-row {
-    /* height: 30%; */
     margin-top: 3%;
+}
+
+.alert-danger  {
+    margin-top: 1%;
+    text-align: center;
 }
 
 /* Other stuff */
@@ -67,6 +33,20 @@ html, body, .container {
         margin-bottom: 10px;
     }
 }
+
+.vertical-videos-row .glyphicon-play-circle {
+    position: absolute;
+    top: 22%;
+    left: 26%;
+    font-size: 7em;
+    opacity: 0.5;
+    color: #f90;
+}
+
+.vertical-videos-row .glyphicon-play-circle:hover, .vertical-videos-row .glyphicon-play-circle:focus {
+    opacity: 1;
+}
+
 
 /* Colors */
 
@@ -127,19 +107,3 @@ body {
     -o-filter: grayscale(100%);
     filter: gray; /* IE6+ */
 }
-
-/* Other */
-
-.vertical-videos-row .glyphicon-play-circle {
-    position: absolute;
-    top: 22%;
-    left: 26%;
-    font-size: 7em;
-    opacity: 0.5;
-    color: #f90;
-}
-
-.vertical-videos-row .glyphicon-play-circle:hover, .vertical-videos-row .glyphicon-play-circle:focus {
-    opacity: 1;
-}
-
