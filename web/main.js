@@ -2,12 +2,14 @@
  * Created by arodriguez on 15/02/17.
  */
 
-function handleUrl(event) {
+function handleUrl(url) {
+
+    if (!url) {
+        showAlertError();
+        return;
+    }
 
     moveUploadInputToTop();
-
-    var clipboardData = event.clipboardData || event.originalEvent.clipboardData || window.clipboardData;
-    var url = clipboardData.getData('text');
 
     //@TODO: extract all the appends, validate image and display error
     appendImageToElement('#preview', 'preview-img', url, 'img-responsive center-block img-border', 'Picture you just upload!');
@@ -35,6 +37,22 @@ function handleUrl(event) {
             console.log(errorMessage); // Optional
         }
     });
+}
+
+function checkOnUrlPaste(event) {
+
+    var clipboardData = event.clipboardData || event.originalEvent.clipboardData || window.clipboardData;
+    var url = clipboardData.getData('text');
+
+    handleUrl(url);
+}
+
+function checkIfUrlEnter(event) {
+
+    if(event && event.keyCode == 13) {
+        var url = $('#input_url').value;
+        handleUrl(url);
+    }
 }
 
 function handleFiles(files) {
@@ -223,33 +241,4 @@ function displayTryAgainButton() {
 
 function refreshPage() {
     location.reload();
-}
-
-function grayscale(div,millisec,bool){
-    if (bool){ /* We want to become grayscale */
-        var i = 0;
-        timertogray = setInterval(function addgray(){
-            if (i < 101){
-                document.getElementById(div).style.filter = "grayscale(" + i + "%)";
-                i = i + 10;
-            }else{
-                clearInterval(timertogray); /* once the grayscale is 100%, we stop timer */
-            }
-        }, millisec);
-    }else{ /* We want to give color back */
-        var i = 100;
-        timerfromgray = setInterval(function addgray(){
-            if (i > 0){
-
-                $('#'.div).css({
-                    '-webkit-filter': 'grayscale('+i+'%)'
-                });
-
-                //document.getElementById(div).style.filter = "grayscale(" + i + "%)";
-                i = i - 10;
-            }else{
-                clearInterval(timerfromgray); /* once the grayscale is 0%, we stop timer */
-            }
-        }, millisec);
-    }
 }

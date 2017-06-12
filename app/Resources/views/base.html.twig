@@ -43,10 +43,10 @@
     <div id="centerRow" class="row vertical-center-row col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
 
             <div class="upload-form">
-                <form id="upload_form" name="upload_form" class="form-horizontal" enctype="multipart/form-data" action="upload-image" method="POST">
+                <form id="upload_form" name="upload_form" class="form-horizontal" enctype="multipart/form-data" action="javascript:void(0);" onKeyPress="checkIfUrlEnter(event)" method="POST">
                     <div class="form-group">
                         <div class="input-group">
-                            <input id="input_url" name="upload_form[url]" type="text" class="form-control input-url-color" onpaste="handleUrl(event)" placeholder="Paste image link or click on the camera">
+                            <input id="input_url" name="upload_form[url]" type="text" class="form-control input-url-color" onpaste="checkOnUrlPaste(event)" placeholder="Paste image link or click on the camera">
                             <input id="upload_icon" name="upload_form[image]" type="file" class="form-control" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
                             <div class="input-group-addon upload-button-color">
                                 <label for="upload_icon" class="icon-camera-size camera-icon-color"><i class="fa fa-camera-retro fa-1x margin-top-icon camera-icon-background "></i></label>
