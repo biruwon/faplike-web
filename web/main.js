@@ -52,7 +52,7 @@ function checkOnUrlPaste(event) {
 function checkIfUrlEnter(event) {
 
     if(event && event.keyCode == 13) {
-        var url = $('#input_url').value;
+        var url = $('#input_url').val();
         handleUrl(url);
     }
 }

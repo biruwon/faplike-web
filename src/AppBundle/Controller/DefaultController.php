@@ -35,11 +35,6 @@ class DefaultController extends Controller
      */
     public function uploadImageAction(Request $request)
     {
-        /*return new JsonResponse([
-            'mainImage' => 'test.jpg',
-            'name' => 'emilia-d'
-        ]);*/
-
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
@@ -74,7 +69,7 @@ class DefaultController extends Controller
     {
         $url = new Url();
 
-        // This is just another way of doing it without form type, unify the forms for image and url
+        // TODO: This is just another way of doing it without form type, unify the forms for image and url
         $form = $this->get('form.factory')
             ->createNamedBuilder('upload_form', FormType::class, $url, [
                 'data_class' => Url::class,
@@ -83,7 +78,7 @@ class DefaultController extends Controller
             ->getForm();
 
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $url = $url->getUrl();
             $imageFromUrl = $this->get(ImageFromUrl::DIC);
@@ -92,10 +87,27 @@ class DefaultController extends Controller
             $image = new Image();
             $image->setImage($imageToValidate);
             $validator = $this->get('validator');
-            $validator->validate($image);
+            $errorList = $validator->validate($image);
+            if ($errorList->count() > 0) {
+                $errorMessage = $errorList[0]->getMessage();
+                return new JsonResponse(
+                    ['message' => $errorMessage],
+                    400
+                );
+            }
 
             list($predictedInfo, $lookALikeImage) = $this->onImageUpload($image);
-        }
+            
+        } else {
+
+            $error = $form->getErrors(true)->current();
+            $errorMessage = $error->getMessage();
+            
+            return new JsonResponse(
+                ['message' => $errorMessage],
+                400
+                );
+            }
 
         return new JsonResponse([
             'mainImage' => $lookALikeImage,
