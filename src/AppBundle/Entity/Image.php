@@ -8,11 +8,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Image
 {
-    /**@Assert\Image(
-     *     minWidth = 1200,
-     *     maxWidth = 1200,
-     *     minHeight = 1200,
-     *     maxHeight = 1200
+    /**
+     * @Assert\Image(
+     *     minWidth = 80,
+     *     maxWidth = 1400,
+     *     minHeight = 80,
+     *     maxHeight = 1800,
+     *     detectCorrupted = true
      * )
      */
     private $image;

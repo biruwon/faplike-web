@@ -35,10 +35,10 @@ class DefaultController extends Controller
      */
     public function uploadImageAction(Request $request)
     {
-        return new JsonResponse([
+        /*return new JsonResponse([
             'mainImage' => 'test.jpg',
             'name' => 'emilia-d'
-        ]);
+        ]);*/
 
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
@@ -47,6 +47,17 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             list($predictedInfo, $lookALikeImage) = $this->onImageUpload($image);
+
+        } else {
+
+            $error = $form->getErrors(true)->current();
+            $errorMessage = $error->getMessage();
+
+            return new JsonResponse(
+                ['message' => $errorMessage],
+                400
+            );
+
         }
 
         return new JsonResponse([

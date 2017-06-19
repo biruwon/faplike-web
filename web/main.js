@@ -5,14 +5,11 @@
 function handleUrl(url) {
 
     if (!url) {
-        showAlertError();
+        showAlertError('There is no valid url');
         return;
     }
 
     moveUploadInputToTop();
-
-    //@TODO: extract all the appends, validate image and display error
-    appendImageToElement('#preview', 'preview-img', url, 'img-responsive center-block img-border', 'Picture you just upload!');
 
     //@TODO: encapsulate the nprogress for both and configure it with better steps
     NProgress.start();
@@ -27,14 +24,19 @@ function handleUrl(url) {
         processData: false,
         contentType: false,
         success: function(response) {
+
+            //@TODO: extract all the appends, validate image and display error
+            appendImageToElement('#preview', 'preview-img', url, 'img-responsive center-block img-border', 'Picture you just upload!');
+
             displayLookALike(response.mainImage, response.name);
             displayTryAgainButton();
             getFeaturedImages(response.name);
             getEmbedVideos(response.name);
             NProgress.done();
         },
-        error: function(jqXHR, textStatus, errorMessage) {
-            console.log(errorMessage); // Optional
+        error: function(jqXHR) {
+            showAlertError(jqXHR.responseJSON.message)
+            NProgress.done();
         }
     });
 }
@@ -65,12 +67,11 @@ function handleFiles(files) {
 
         NProgress.start();
 
-        displayPreview(file);
         fileUpload(file);
 
     } else {
 
-        showAlertError();
+        showAlertError('You need to upload a valid image');
     }
 }
 
@@ -81,13 +82,13 @@ function isValidImage(file) {
     return imageType.test(file.type);
 }
 
-function showAlertError() {
+function showAlertError(message) {
 
     var alert = '' +
         '<div id="uploadError" class="alert alert-danger alert-dismissible" role="alert">' +
         '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>' +
         '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-        'You need to upload a valid image!</div>' +
+        message + '</div>' +
     '';
 
     $('.container').prepend(alert);
@@ -108,14 +109,16 @@ function fileUpload(file) {
         processData: false,
         contentType: false,
         success: function(response) {
+            displayPreview(file);
             displayLookALike(response.mainImage, response.name);
             displayTryAgainButton();
             getFeaturedImages(response.name);
             getEmbedVideos(response.name);
             NProgress.done();
         },
-        error: function(jqXHR, textStatus, errorMessage) {
-            console.log(errorMessage); // Optional
+        error: function(jqXHR) {
+            showAlertError(jqXHR.responseJSON.message)
+            NProgress.done();
         }
     });
 }
