@@ -11,9 +11,9 @@ class Image
     /**
      * @Assert\Image(
      *     minWidth = 80,
-     *     maxWidth = 1400,
+     *     maxWidth = 1600,
      *     minHeight = 80,
-     *     maxHeight = 1800,
+     *     maxHeight = 2000,
      *     detectCorrupted = true
      * )
      */

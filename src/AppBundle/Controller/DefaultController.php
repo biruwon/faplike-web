@@ -11,9 +11,11 @@ use AppBundle\Service\ImageFromUrl;
 use AppBundle\Service\VideoAPI;
 use AppBundle\Repository\MainImage;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -41,7 +43,11 @@ class DefaultController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            list($predictedInfo, $lookALikeImage) = $this->onImageUpload($image);
+            try {
+                list($predictedInfo, $lookALikeImage) = $this->onImageUpload($image);
+            } catch (ProcessFailedException $exception){
+                return new Response('', 500);
+            }
 
         } else {
 
@@ -79,10 +85,17 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
+        // TODO: all the return shit brother!
         if ($form->isSubmitted() && $form->isValid()) {
             $url = $url->getUrl();
             $imageFromUrl = $this->get(ImageFromUrl::DIC);
             $imageToValidate = $imageFromUrl->getImage($url);
+            if (is_null($imageToValidate)) {
+                return new JsonResponse(
+                    ['message' => 'This is not a valid url'],
+                    400
+                );
+            }
 
             $image = new Image();
             $image->setImage($imageToValidate);
@@ -96,7 +109,11 @@ class DefaultController extends Controller
                 );
             }
 
-            list($predictedInfo, $lookALikeImage) = $this->onImageUpload($image);
+            try {
+                list($predictedInfo, $lookALikeImage) = $this->onImageUpload($image);
+            } catch (ProcessFailedException $exception){
+                return new Response('', 500);
+            }
             
         } else {
 

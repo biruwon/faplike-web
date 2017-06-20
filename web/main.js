@@ -35,7 +35,7 @@ function handleUrl(url) {
             NProgress.done();
         },
         error: function(jqXHR) {
-            showAlertError(jqXHR.responseJSON.message)
+            handleError(jqXHR);
             NProgress.done();
         }
     });
@@ -82,6 +82,20 @@ function isValidImage(file) {
     return imageType.test(file.type);
 }
 
+function handleError(jqXHR) {
+
+    switch (jqXHR.status) {
+        case 500:
+            showAlertError('An internal error happen occurred, please try again later');
+            break;
+        case 400:
+            showAlertError(jqXHR.responseJSON.message);
+            break;
+        default:
+            showAlertError('An internal error happen occurred, please try again later');
+    }
+}
+
 function showAlertError(message) {
 
     var alert = '' +
@@ -117,7 +131,7 @@ function fileUpload(file) {
             NProgress.done();
         },
         error: function(jqXHR) {
-            showAlertError(jqXHR.responseJSON.message)
+            handleError(jqXHR);
             NProgress.done();
         }
     });

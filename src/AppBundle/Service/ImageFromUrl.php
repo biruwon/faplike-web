@@ -19,11 +19,9 @@ class ImageFromUrl
 
         // copy to a tmp location
         $tmp = sys_get_temp_dir().'/'.sha1(uniqid(mt_rand(), true)).'.'.$extension;
-        copy($imageUrl, $tmp);
-
-        $uploadedFile = $this->createUploadedFile($tmp);
-
-        return $uploadedFile;
+        $success = @copy($imageUrl, $tmp);
+        
+        return $success ? $this->createUploadedFile($tmp) : null;
     }
 
 
