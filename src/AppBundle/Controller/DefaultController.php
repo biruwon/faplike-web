@@ -41,12 +41,22 @@ class DefaultController extends Controller
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
+        // TODO: worst code ever!
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             try {
                 list($predictedInfo, $lookALikeImage) = $this->onImageUpload($image);
+
+                if ($predictedInfo['name'] === 'none') {
+                    return new JsonResponse(
+                        ['message' => 'No face detected in the image'],
+                        400
+                    );
+                }
+
             } catch (ProcessFailedException $exception){
-                return new Response('', 500);
+                return new JsonResponse('', 500);
             }
 
         } else {
@@ -111,6 +121,13 @@ class DefaultController extends Controller
 
             try {
                 list($predictedInfo, $lookALikeImage) = $this->onImageUpload($image);
+
+                if ($predictedInfo['name'] === 'none') {
+                    return new JsonResponse(
+                        ['message' => 'No face detected in the image'],
+                        400
+                    );
+                }
             } catch (ProcessFailedException $exception){
                 return new Response('', 500);
             }

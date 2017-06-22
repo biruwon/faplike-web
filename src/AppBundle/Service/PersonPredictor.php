@@ -20,22 +20,33 @@ class PersonPredictor
     public function predict($imageName)
     {
         //@TODO how to call docker dinamically
-        $dockerCall = 'docker exec 5bf0cc3a12ee /root/openface/demos/classifier.py --verbose infer /root/openface/web-data/classifier-1576-limit-20.pkl ';
+        $dockerCall = 'docker exec 23fde3dab5f8 /root/openface/demos/classifier.py --verbose infer /root/openface/web-data/classifier-1576-limit-20.pkl ';
         $dockerCall .= '/root/openface/web-data/uploads/images/';
         $dockerCall .= $imageName;
 
         $process = new Process($dockerCall);
         $process->run();
 
+        // TODO: if else nightmare
+
         if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
+            $output = $process->getErrorOutput();
+
+            if ($this->noFaceDetected($output)) {
+                $namePredicted = 'none';
+                $predictionConfidence = 0;
+            } else {
+
+                throw new ProcessFailedException($process);
+            }
+
+        } else {
+
+            $output = $process->getOutput();
+            //@TODO remove this shit and create a DTO
+            $namePredicted = trim($this->getStringBetween($output, 'Predict ', 'with'));
+            $predictionConfidence = trim($this->getStringBetween($output, 'with ', 'confidence'));
         }
-
-        $output = $process->getOutput();
-
-        //@TODO remove this shit and create a DTO
-        $namePredicted = trim($this->getStringBetween($output, 'Predict ', 'with'));
-        $predictionConfidence = trim($this->getStringBetween($output, 'with ', 'confidence'));
 
         return [
             'name' => $namePredicted,
@@ -43,7 +54,16 @@ class PersonPredictor
         ];
     }
 
-    public function getStringBetween($string, $start, $end)
+    protected function noFaceDetected($output)
+    {
+        if (strpos($output, 'Unable to find a face') !== false) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function getStringBetween($string, $start, $end)
     {
         $string = ' ' . $string;
         $ini = strpos($string, $start);
