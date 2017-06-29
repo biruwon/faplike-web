@@ -21,6 +21,13 @@
     text-align: center;
 }
 
+.footer {
+    margin-bottom: 10px;
+    bottom: 0;
+    position: sticky;
+    color: #f90;
+}
+
 /* Other stuff */
 
 .icon-camera-size {
@@ -97,6 +104,14 @@ body {
     color: #000;
     font-weight: bold;
     margin-bottom: 15px;
+}
+
+.footer a {
+    color: inherit;
+}
+
+.footer i {
+    color: #af1820;
 }
 
 .grayscale {
