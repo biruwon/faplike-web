@@ -10,6 +10,7 @@ use AppBundle\Service\PersonPredictor;
 use AppBundle\Service\ImageFromUrl;
 use AppBundle\Service\VideoAPI;
 use AppBundle\Repository\MainImage;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -187,6 +188,10 @@ class DefaultController extends Controller
         /** @var PersonPredictor $personPredictor */
         $personPredictor = $this->get(PersonPredictor::DIC);
         $predictedInfo = $personPredictor->predict($imageName);
+
+        /** @var LoggerInterface $logger */
+        $logger = $this->get('logger');
+        $logger->info(sprintf('image: %s | name: %s | confidence: %f', $imageName, $predictedInfo['name'], $predictedInfo['confidence']));
 
         /** @var MainImage $mainImageRepository */
         $mainImageRepository = $this->get(MainImage::DIC);

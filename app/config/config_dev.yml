@@ -18,6 +18,11 @@ monolog:
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
             channels: [!event]
+        prediction:
+            type: stream
+            path: "%kernel.logs_dir%/predictions.log"
+            level: info
+            channels: [app]
         console:
             type:   console
             channels: [!event, !doctrine]
