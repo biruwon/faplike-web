@@ -20,7 +20,7 @@ class PersonPredictor
     public function predict($imageName)
     {
         //@TODO how to call docker dinamically
-        $dockerCall = 'docker exec 23fde3dab5f8 /root/openface/demos/classifier.py --verbose infer /root/openface/web-data/classifier-1576-limit-20.pkl ';
+        $dockerCall = 'docker exec openface /root/openface/demos/classifier.py --verbose infer /root/openface/web-data/classifier.pkl ';
         $dockerCall .= '/root/openface/web-data/uploads/images/';
         $dockerCall .= $imageName;
 
