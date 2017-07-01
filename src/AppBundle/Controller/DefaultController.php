@@ -57,7 +57,7 @@ class DefaultController extends Controller
                 }
 
             } catch (ProcessFailedException $exception){
-                return new JsonResponse('', 500);
+                return $this->generate500Error($exception);
             }
 
         } else {
@@ -129,8 +129,8 @@ class DefaultController extends Controller
                         400
                     );
                 }
-            } catch (ProcessFailedException $exception){
-                return new Response('', 500);
+            } catch (ProcessFailedException $exception) {
+                return $this->generate500Error($exception);
             }
             
         } else {
@@ -198,5 +198,18 @@ class DefaultController extends Controller
         $lookALikeImage = $mainImageRepository->getByName($predictedInfo['name']);
 
         return [$predictedInfo, $lookALikeImage];
+    }
+
+    /**
+     * @param $exception
+     * @return JsonResponse
+     */
+    protected function generate500Error($exception)
+    {
+        /** @var LoggerInterface $logger */
+        $logger = $this->get('logger');
+        $logger->error($exception->getMessage());
+
+        return new JsonResponse('', 500);
     }
 }
