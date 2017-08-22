@@ -16,9 +16,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 class DefaultController extends Controller
@@ -41,9 +39,7 @@ class DefaultController extends Controller
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
-
-        // TODO: worst code ever!
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
 
             try {
@@ -61,15 +57,7 @@ class DefaultController extends Controller
             }
 
         } else {
-
-            $error = $form->getErrors(true)->current();
-            $errorMessage = $error->getMessage();
-
-            return new JsonResponse(
-                ['message' => $errorMessage],
-                400
-            );
-
+            return $this->generate400error($form);
         }
 
         return new JsonResponse([
@@ -86,7 +74,7 @@ class DefaultController extends Controller
     {
         $url = new Url();
 
-        // TODO: This is just another way of doing it without form type, unify the forms for image and url
+        //@TODO: This is just another way of doing it without form type, unify the forms for image and url
         $form = $this->get('form.factory')
             ->createNamedBuilder('upload_form', FormType::class, $url, [
                 'data_class' => Url::class,
@@ -96,7 +84,7 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        // TODO: all the return shit brother!
+        // TODO: remove all the return and this long method
         if ($form->isSubmitted() && $form->isValid()) {
             $url = $url->getUrl();
             $imageFromUrl = $this->get(ImageFromUrl::DIC);
@@ -135,14 +123,8 @@ class DefaultController extends Controller
             
         } else {
 
-            $error = $form->getErrors(true)->current();
-            $errorMessage = $error->getMessage();
-            
-            return new JsonResponse(
-                ['message' => $errorMessage],
-                400
-                );
-            }
+            return $this->generate400error($form);
+        }
 
         return new JsonResponse([
             'mainImage' => $lookALikeImage,
@@ -200,6 +182,8 @@ class DefaultController extends Controller
         return [$predictedInfo, $lookALikeImage];
     }
 
+    //@TODO: extract to an error service
+
     /**
      * @param $exception
      * @return JsonResponse
@@ -211,5 +195,20 @@ class DefaultController extends Controller
         $logger->error($exception->getMessage());
 
         return new JsonResponse('', 500);
+    }
+
+    /**
+     * @param $form
+     * @return JsonResponse
+     */
+    protected function generate400error($form)
+    {
+        $error = $form->getErrors(true)->current();
+        $errorMessage = $error->getMessage();
+
+        return new JsonResponse(
+            ['message' => $errorMessage],
+            400
+        );
     }
 }
