@@ -9,11 +9,20 @@ class VideoAPI
 {
     const DIC = 'faplike.service.video_api';
 
+    private $endpoint;
+    private $id;
+
+    public function __construct($endpoint, $id)
+    {
+        $this->endpoint = $endpoint;
+        $this->id = $id;
+    }
+
     public function search($name)
     {
-        $client = new Client(['base_uri' => 'http://www.pornhub.com/webmasters/']);
+        $client = new Client(['base_uri' => $this->endpoint]);
         $response = $client->request('GET', 'search', [
-            'query' => ['id' => '10050107', 'search' => $name, 'thumbsize' => 'medium']
+            'query' => ['id' => $this->id, 'search' => $name, 'thumbsize' => 'medium']
         ]);
 
         $videos = array_slice(json_decode($response->getBody(), true)['videos'], 0, 2);

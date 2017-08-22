@@ -12,10 +12,7 @@ class ImageFromUrl
 
     public function getImage($imageUrl)
     {
-        // any security problem here?
         $extension = pathinfo($imageUrl, PATHINFO_EXTENSION);
-        //$temp_file = tempnam(sys_get_temp_dir(), 'Tux');
-        //$imageContent = imagecreatefromstring(file_get_contents($imageUrl));
 
         // copy to a tmp location
         $tmp = sys_get_temp_dir().'/'.sha1(uniqid(mt_rand(), true)).'.'.$extension;
@@ -24,9 +21,9 @@ class ImageFromUrl
         return $success ? $this->createUploadedFile($tmp) : null;
     }
 
-
     private function createUploadedFile($value)
     {
+        //@TODO: this is not needed
         if (null !== $value && is_readable($value)) {
             $error = UPLOAD_ERR_OK;
             $size = filesize($value);

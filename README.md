@@ -1,4 +1,11 @@
-faplike-web
+faplike
 ================
 
-A Symfony project created on February 12, 2017, 9:59 am.
+Project created by @biruwon
+
+================
+
+TODO:
+
+- FE: main.js duplicated code
+- BE: add tests

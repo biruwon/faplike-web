@@ -19,7 +19,7 @@ class PersonPredictor
 
     public function predict($imageName)
     {
-        //@TODO how to call docker dinamically
+        //@TODO remove hardcoded command and paths
         $dockerCall = 'docker exec openface /root/openface/demos/classifier.py --verbose infer /root/openface/web-data/classifier.pkl ';
         $dockerCall .= '/root/openface/web-data/uploads/images/';
         $dockerCall .= $imageName;
@@ -28,7 +28,6 @@ class PersonPredictor
         $process->run();
 
         // TODO: if else nightmare
-
         if (!$process->isSuccessful()) {
             $output = $process->getErrorOutput();
 
@@ -43,7 +42,7 @@ class PersonPredictor
         } else {
 
             $output = $process->getOutput();
-            //@TODO remove this shit and create a DTO
+            //@TODO create a DTO
             $namePredicted = trim($this->getStringBetween($output, 'Predict ', 'with'));
             $predictionConfidence = trim($this->getStringBetween($output, 'with ', 'confidence'));
         }

@@ -17,3 +17,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    #added
+    video_api_endpoint: 'http://www.pornhub.com/webmasters/'
+    video_api_id:   yourAPIid

@@ -18,6 +18,7 @@ services:
 
     faplike.service.video_api:
         class: AppBundle\Service\VideoAPI
+        arguments: ['%video_api_endpoint%', '%video_api_id%']
 
     faplike.repository.main_image:
         class: AppBundle\Repository\MainImage
